@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>teste</title>
+</head>
+<body>
+
+    <button id="mostraBtn">Mostrar</button>
+    <div id="exibe"></div>
+
+    <h3><strong>Adicionar Produto</strong></h3>
+    <input type="text" id="nome" placeholder="Nome do produto">
+    <input type="text" id="cor" placeholder="Cor">
+    <input type="number" id="tamanho" placeholder="Tamanho">
+    <input type="text" id="marca" placeholder="Marca">
+    <input type="number" id="preco" placeholder="Preço">
+    <input type="text" id="categoria" placeholder="Categoria">
+    <button id="adicionarBtn">Adicionar</button>
+
+    <h3><strong>Excluir Produto</strong></h3>
+    <input type="number" id="indiceExcluir" placeholder="Índice">
+    <button id="excluirBtn">Excluir</button>
+
+    <h3><strong>Alterar Produto</strong></h3>
+    <input type="number" id="indiceAlterar" placeholder="Índice">
+    <input type="text" id="novoNome" placeholder="Novo Nome">
+    <input type="text" id="novaCor" placeholder="Nova Cor">
+    <input type="number" id="novoTamanho" placeholder="Novo Tamanho">
+    <input type="text" id="novaMarca" placeholder="Nova Marca">
+    <input type="number" id="novoPreco" placeholder="Novo Preço">
+    <input type="text" id="novaCategoria" placeholder="Nova Categoria">
+    <button id="alterarBtn">Alterar</button>
+    
+<!-- ------------------------JAVA-------------------------- -->
+    <script>
+
+        var calcados = {
+            produtos: [
+                {
+                    nome: "Tênis",
+                    cor: "Preto",
+                    Tamanho: 36,
+                    marca: "Nike",
+                    preco: 300.00,
+                    categoria: "Masculino Adulto"
+                },
+                {
+                    nome: "Tênis",
+                    cor: "Preto",
+                    Tamanho: 36,
+                    marca: "Nike",
+                    preco: 300.00,
+                    categoria: "Feminino Adulto"
+                }
+            ],
+            
+            adicionaar(produto) {
+                this.produtos.push(produto)
+            },
+
+            alterar(key, novoProduto) {
+                this.produtos[key] = novoProduto
+            },
+
+            excluir(deletar) {
+                if (deletar < this.produtos.length) {
+                    delete this.produtos[deletar]
+                    console.log("Produto removido com sucesso!");
+                } else {
+                    console.log("Índice inválido. O produto não foi removido.");
+                }
+            }
+        }
+        
+        //--- exibir os dados ja fornecidos padrão do calcados ---//
+        // pega o id para salvar na variavel
+        var exibe = document.getElementById("exibe")
+        var botao = document.getElementById("mostraBtn")
+
+        botao.addEventListener("click", exibeMostrar)
+
+        function exibeMostrar() {
+            var listaProdutos = []
+
+            function exibirProduto(produto) {
+                listaProdutos += 'Nome: ' + produto.nome + '<br>';
+                listaProdutos += 'Cor: ' + produto.cor + '<br>';
+                listaProdutos += 'Tamanho: ' + produto.Tamanho + '<br>';
+                listaProdutos += 'Marca: ' + produto.marca + '<br>';
+                listaProdutos += 'Preço: R$' + produto.preco.toFixed(2) + '<br>';
+                listaProdutos += 'Categoria: ' + produto.categoria + '<br><br>';
+            }
+
+            calcados.produtos.forEach(exibirProduto);
+
+            exibe.innerHTML = listaProdutos;
+        }
+
+        // Quando o botão é clicado, a função definida como function exibeMostrar() é executada.
+        // Dentro dessa função, é criada uma variável chamada listaProdutos vazia. 
+        // Em seguida, é utilizado o método forEach para percorrer cada produto do calcados.produtos
+        // Dentro do loop forEach, cada propriedade será adicionada sequencialmente à listaProdutos.
+        // No final do loop, o conteúdo da listaProdutos é atribuído a div "exibe" os produtos sejam exibidos na tela.
+
+    </script>
+</body>
+</html>

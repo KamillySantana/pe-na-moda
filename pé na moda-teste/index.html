@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <button id="mostra">Mostrar</button>
+    <div id="exibe"></div>
+
+    <script>
+        var calcados = {
+            produtos: [
+                {
+                    nome: "Tênis",
+                    cor: "Preto",
+                    Tamanho: 36,
+                    marca: "Nike",
+                    preço: 300.00,
+                    categoria: "Masculino Adulto"
+                },
+                {
+                    nome: "Tênis",
+                    cor: "Preto",
+                    Tamanho: 36,
+                    marca: "Nike",
+                    preço: 300.00,
+                    categoria: "Feminino Adulto"
+                }
+            ],
+            adicionar(produto) {
+                this.produtos.push(produto)
+            },
+
+            alterar(key, novoProduto) {
+                this.produtos[key] = novoProduto
+            },
+
+            excluir(deletar) {
+                if (deletar < this.produtos.length) {
+                    delete this.produtos[deletar]
+                    console.log("Produto removido com sucesso!");
+                } else {
+                    console.log("Índice inválido. O produto não foi removido.");
+                }
+            }
+        }
+
+        // pega o id para salvar na variavel
+        var exibe = document.getElementById("exibe")
+        var botao = document.getElementById("mostra")
+
+        botao.addEventListener("click", exibeMostrar);
+
+        function exibeMostrar() {
+            var listaProdutos = [];
+
+            function exibirProduto(produto) {
+                listaProdutos += 'Nome: ' + produto.nome + '<br>';
+                listaProdutos += 'Cor: ' + produto.cor + '<br>';
+                listaProdutos += 'Tamanho: ' + produto.Tamanho + '<br>';
+                listaProdutos += 'Marca: ' + produto.marca + '<br>';
+                listaProdutos += 'Preço: R$' + produto.preço.toFixed(2) + '<br>';
+                listaProdutos += 'Categoria: ' + produto.categoria + '<br><br>';
+            }
+
+            calcados.produtos.forEach(exibirProduto);
+
+            exibe.innerHTML = listaProdutos;
+        }
+
+        // Quando o botão é clicado, a função definida como function exibeMostrar() é executada.
+        // Dentro dessa função, é criada uma variável chamada listaProdutos vazia. 
+        // Em seguida, é utilizado o método forEach para percorrer cada produto do calcados.produtos
+        // Dentro do loop forEach, cada propriedade será adicionada sequencialmente à listaProdutos.
+        // No final do loop, o conteúdo da listaProdutos é atribuído a div "exibe" os produtos sejam exibidos na tela.
+
+    </script>
+</body>
+</html>
