@@ -1,0 +1,89 @@
+:root{
+    --cor--principal: #CA9E93 ;
+    --cor--secundaria: #D9BCB8;
+    --cor--button: #DDEEDD;
+
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+
+body{
+    background-color: var(--cor--principal);
+}
+
+header{
+    text-align: center;
+}
+
+header img{
+    width: 200px;
+}
+#exibe{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 15px;
+    gap: 20px;
+
+}
+
+.produtoCalopsita {
+    border-radius: 10px;
+    border: 2px solid #a57e74;
+    padding: 10px;
+}
+
+/* #btn_edit,#btn_exclui{
+    margin: 10px 0px 10px 350px;
+} */
+
+.main{
+    background-color: var(--cor--secundaria);
+    display: grid;
+    text-align: center;
+    padding: 10px;
+    margin: 0px 200px 0px 200px;
+}
+.main button{
+    border: none;
+    border-radius: 15px;
+    background-color: var(--cor--button);
+    width: 150px;
+    padding: 9px;
+}
+
+#adicionar input{
+    border: none;
+    margin: 12px;
+    padding: 8px;
+    border: 2px solid var(--cor--principal);
+    border-radius: 10px;
+    width: 300px;
+}
+
+#adicionar button{
+    border: none;
+    border-radius: 15px;
+    background-color: var(--cor--button);
+    width: 150px;
+    padding: 9px;
+}
+
+#alterar input{
+    border: none;
+    margin: 12px;
+    padding: 8px;
+    border: 2px solid var(--cor--principal);
+    border-radius: 10px;
+    width: 300px;
+}
+#alterar button{
+    border: none;
+    border-radius: 15px;
+    background-color: var(--cor--button);
+    width: 150px;
+    padding: 9px;
+}

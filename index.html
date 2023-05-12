@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="objetos/assents/css/style.css">
+    <link rel="stylesheet" href="objetos/assents/css/mobile.css">
+    <title>pé na moda</title>
+</head>
+<body>
+    <header>
+        <img src="objetos/assents/img/logo.png" alt="">
+    </header>
+
+    <div class="main">
+        <div class="textin">
+            <h2>Alguns dos nossos Produtos ja cadastrados</h2>
+            <br>
+
+            <button id="mostraBtn">Mostrar</button>
+            <div id="exibe"></div>
+        </div>
+
+        <br>
+        <h3>Adicionar um produto</h3>
+        <br>
+
+        <div id="adicionar">
+            <h4><strong>Adicionar Produto</strong></h4>
+
+            <input type="text" id="nome" placeholder="Nome do produto">
+            <input type="text" id="cor" placeholder="Cor">
+            <input type="number" id="tamanho" placeholder="Tamanho">
+            <input type="text" id="marca" placeholder="Marca">
+            <input type="number" id="preco" placeholder="Preço">
+            <input type="text" id="categoria" placeholder="Categoria">
+            <div>
+                <button id="adicionarBtn">Adicionar</button>
+            </div>
+        </div>
+
+        <br>
+
+        <h3>Alterar um produto</h3>
+
+        <br>
+
+        <div id="alterar">
+            <h4><strong>Alterar Produto</strong></h4>
+
+            <input type="number" id="indiceAlterar" placeholder="Índice">
+            <input type="text" id="novoNome" placeholder="Novo Nome">
+            <input type="text" id="novaCor" placeholder="Nova Cor">
+            <input type="number" id="novoTamanho" placeholder="Novo Tamanho">
+            <input type="text" id="novaMarca" placeholder="Nova Marca">
+            <input type="number" id="novoPreco" placeholder="Novo Preço">
+            <input type="text" id="novaCategoria" placeholder="Nova Categoria">
+            <div>
+                <button id="alterarBtn">Alterar</button>
+            </div>
+        </div>
+    </div>
+<!-- ---------------------------------JAVA SCRIPT------------------------------------ -->
+    <script>
+        var calcados = {
+            produtos: [
+                {
+                    nome: "Tênis",
+                    cor: "Preto",
+                    Tamanho: 36,
+                    marca: "Nike",
+                    preco: 300.00,
+                    categoria: "Masculino Adulto"
+                },
+                {
+                    nome: "Tênis",
+                    cor: "Preto",
+                    Tamanho: 36,
+                    marca: "Nike",
+                    preco: 300.00,
+                    categoria: "Feminino Adulto"
+                }
+            ],
+            
+            adicionar(produto) {
+                this.produtos.push(produto)
+            },
+
+            alterar(key, novoProduto) {
+                this.produtos[key] = novoProduto
+            },
+
+            excluir(deletar) {
+                if (deletar < this.produtos.length) {
+                    this.produtos.splice(deletar, 1)
+                    console.log("Produto removido com sucesso!");
+                    exibeMostrar()
+                } else {
+                    console.log("Índice inválido. O produto não foi removido.");
+                }
+            }
+        }
+        
+//-------------------- exibir os dados ja fornecidos padrão do calcados --------------------------//
+
+        // recuperar o elemento do HTML e transformar na variavel
+        var exibe = document.getElementById("exibe")
+        var botao = document.getElementById("mostraBtn")
+
+        botao.addEventListener("click", exibeMostrar)
+
+        function exibeMostrar() {
+            var listaProdutos = []
+
+            function exibirProduto(produto, index) {
+                listaProdutos += '<div class="produtoCalopsita">'
+                listaProdutos += 'Nome: ' + produto.nome + '<br>';
+                listaProdutos += 'Cor: ' + produto.cor + '<br>';
+                listaProdutos += 'Tamanho: ' + produto.Tamanho + '<br>';
+                listaProdutos += 'Marca: ' + produto.marca + '<br>';
+                listaProdutos += 'Preço: R$' + produto.preco + '<br>';
+                listaProdutos += 'Categoria: ' + produto.categoria + '<br><br>';
+                listaProdutos += "<button onclick='edita("+ index +")'>Editar</button>";
+                listaProdutos += "<button onclick='calcados.excluir("+ index +")'>Excluir</button>";
+                listaProdutos += '</div>'
+            }
+
+            calcados.produtos.forEach(exibirProduto)
+
+            exibe.innerHTML = listaProdutos
+        }
+
+        // Quando o botão é clicado, a função definida como function exibeMostrar() é executada.
+        // Dentro dessa função, é criada uma variável chamada listaProdutos vazia. 
+        // Em seguida, é utilizado o método forEach para percorrer cada produto do calcados.produtos
+        // Dentro do loop forEach, cada propriedade será adicionada sequencialmente à listaProdutos.
+        // No final do loop, o conteúdo da listaProdutos é atribuído a div "exibe" os produtos sejam exibidos na tela.
+    
+//-----------------------------------------ALTERAR-----------------------------------------//
+
+        // função responssavel por pegar os valores quando clica no botão editar e preencher os campos dos inputs
+        // A função é chamada quando o botão "Editar" é clicado em um determinado produto.
+        function edita(key) {
+            var produto = calcados.produtos[key] // recupera os valores da lista calcados.produtos
+
+            var indiceAlterar = document.getElementById("indiceAlterar") // recuperar o elemento do HTML e transformar na variavel
+            var novoNome = document.getElementById("novoNome")
+            var novaCor = document.getElementById("novaCor")
+            var novoTamanho = document.getElementById("novoTamanho")
+            var novaMarca = document.getElementById("novaMarca")
+            var novoPreco = document.getElementById("novoPreco")
+            var novaCategoria = document.getElementById("novaCategoria")
+
+            indiceAlterar.value = key // A variável key representa a posição do produto na lista de produtos exibidos, 
+            // e será usada posteriormente para identificar qual produto deverá ser atualizado.
+
+            novoNome.value = produto.nome // joga o valor que estava la dentro da lista para o input do alterar
+            novaCor.value = produto.cor
+            novoTamanho.value = produto.Tamanho
+            novaMarca.value = produto.marca
+            novoPreco.value = produto.preco
+            novaCategoria.value = produto.categoria
+
+        }
+
+// -----------------------------------ALTERAR SEGUNDA PARTE-------------------------------------------- //
+        var btnAlterar = document.getElementById("alterarBtn")
+
+        btnAlterar.addEventListener("click", alterar)
+
+        function alterar(){ // alterar() é chamada quando o botão "Alterar" é clicado para confirmar a edição do produto. 
+            var indiceAlterar = document.getElementById("indiceAlterar")
+            var novoNome = document.getElementById("novoNome")
+            var novaCor = document.getElementById("novaCor")
+            var novoTamanho = document.getElementById("novoTamanho")
+            var novaMarca = document.getElementById("novaMarca")
+            var novoPreco = document.getElementById("novoPreco")
+            var novaCategoria = document.getElementById("novaCategoria")
+
+            var obj = { // representa o novo produto com os valores atualizados dos campos de edição.
+                nome: novoNome.value,
+                cor: novaCor.value,
+                Tamanho: novoTamanho.value,
+                marca: novaMarca.value,
+                preco: novoPreco.value,
+                categoria: novaCategoria.value
+            }
+
+            calcados.alterar(indiceAlterar.value, obj) // é chamada para atualizar o produto na lista de produtos.
+            // A função calcados.alterar() é definida no objeto calcados e recebe o índice do produto a ser alterado e o novo objeto do produto.
+            exibeMostrar() // é chamada para atualizar a exibição dos produtos na página.
+        }
+
+// ---------------------------------------ADICIONAR-------------------------------------------- //
+        var btnAdicionar = document.getElementById("adicionarBtn")
+
+        btnAdicionar.addEventListener("click", adicionar)
+
+        function adicionar() {
+            var nome = document.getElementById("nome")
+            var cor = document.getElementById("cor")
+            var tamanho = document.getElementById("tamanho")
+            var marca = document.getElementById("marca")
+            var preco = document.getElementById("preco")
+            var categoria = document.getElementById("categoria")
+
+            var obj = { // obj é criado para representar o novo produto a ser adicionado à lista. 
+                nome: nome.value, // Ele contém as todas as propriedades que são preenchidas com os
+                cor: cor.value,   // valores obtidos dos campos de entrada.
+                Tamanho: tamanho.value,
+                marca: marca.value,
+                preco: preco.value,
+                categoria: categoria.value
+            }
+
+            calcados.adicionar(obj) // é chamada para adicionar o novo produto(valores) à lista de produtos existente. 
+            // A função adicionar é definida no objeto calcados e recebe o objeto obj como argumento.
+            exibeMostrar()
+            // é chamada para atualizar a exibição dos produtos na página.
+        }
+
+    </script>
+</body>
+</html>
